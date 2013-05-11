@@ -7,16 +7,22 @@
  */
 
 window.onload = function() {
-  var url, 
-      jqxhr;
-  for( i= 0 ; i < 2 ; i++ ){
-    url = document.URL+'inputs/'+i;       
+    var url, 
+        response,
+        data,
+        jqxhr;  
+
+    var customerId = prompt("Enter a customer ID");
+
+    // Encode the user's input as query parameters in a URL
+    var url = document.URL+'customers/'+customerId;       
+
+    // send request as url
     jqxhr = $.getJSON( url, function(data) {
         console.log('API response received');    
-        $('#input').append('<p>input gpio port '+data['gpio']+' on pin '+data['pin']+' has current value '+data['value']+'</p>');        
+        $('#customer').html('customer name is '+data['first']+' '+data['last']);        
       } 
     ); 
-  }
 }; 
 
 

@@ -1,8 +1,8 @@
 README
 
-rpi-webapp-express
+webapp-express
 
-an example of a web app server for he Raspberry Pi in Node & Express that provides a RESTful API responding to an ajax request which returns a JSON object which can be directly referenced.
+an example of a web app server in Node & Express that provides a RESTful API responding to an ajax request which returns a JSON object which can be directly referenced.
 
 myapi.js is a node.js application. its an http server which serves html and js files,
 and also responds to API requests

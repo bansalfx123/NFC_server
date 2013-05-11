@@ -5,7 +5,7 @@
  * 
  * DESCRIPTION:
  * a "HELLO WORLD" server-side application to demonstrate running a node 
- * API Appserver on a Raspberry Pi to access IOs
+ * API Appserver 
  * Uses the Express node packages. 
  * 
  * 
@@ -22,9 +22,8 @@ var express   = require('express');
 
 var app       = express();
 
-// dummy input port values for our example
-var inputs = [    { pin: '11', gpio: '17', value: 1 },
-                  { pin: '12', gpio: '18', value: 0 }
+var customers = [ { first: 'Tom', last: 'Bosley'},
+                  { first: 'James', last: 'Kirk'}
                 ];
 
 // ------------------------------------------------------------------------
@@ -41,17 +40,17 @@ var inputs = [    { pin: '11', gpio: '17', value: 1 },
 //
 
 // Express route for incoming requests for a customer name
-app.get('/inputs/:id', function(req, res){
+app.get('/customers/:id', function(req, res){
   // send an object as a JSON string
  console.log('id = '+req.params.id);
- res.send(inputs[req.params.id]);
+ res.send(customers[req.params.id]);
 }); // apt.get()
 
-// Express route for incoming requests for a list of all inputs
-app.get('/inputs', function(req, res){
+// Express route for incoming requests for a list of all customers
+app.get('/customers', function(req, res){
   // send an object as a JSON string
-  console.log('all inputs');
-  res.send(inputs);
+  console.log('all customers');
+  res.send(customers);
 }); // apt.get()
 
 // Express route for any other unrecognised incoming requests
