@@ -1,17 +1,22 @@
 README
 
-webapp-express
+NFC_SERVER 
 
-an example of a web app server in Node & Express that provides a RESTful API responding to an ajax request which returns a JSON object which can be directly referenced.
+an example of an app server in Node & Express that provides: 
 
-myapi.js is a node.js application. its an http server which serves html and js files,
-and also responds to API requests
+1. a socket server on port 51717
+- accepts socket connections from a TCP client implemented on the Raspberry Pi
+- accepts messages from the client which contain NFC transactions and status events 
+
+2. a web server and RESTful API on port 3000 which:
+- serves a webapp to web clients to monitor NFC activity 
+- accepts Ajax requests from that webapp to display NFC transaction data. API calls respond to a request by returning a JSON object which can be directly referenced.
 
 to start, open terminal window and run node with the myapi.js file as argument
     > node myapi.js
 
-this starts the http server on http://localthost using port 3000
+this starts the http server using port 3000
 
-When a user now browses to http://localhost:3000, index.html is loaded (served by myapi.js) 
-index.html loads the myclient.js file with the JSON query logic.
+When a user now browses to http://<hostname>:3000, index.html will be loaded to the browser (served by the express webserver implemented in myapi.js) 
 
+the client-side code displays a list of NFC transactions, polling the server using AJAX requests for new transations. 
