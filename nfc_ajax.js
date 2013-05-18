@@ -9,6 +9,8 @@
  *  { 'tag1' : 'value',
  *    'tag2' : 'value',
  *  }
+ * @author Robert Drummond
+ * Copyright (c) 2013 Pink Pelican NZ Ltd <bob@pink-pelican.com>
  */
 
 window.onload = function() {

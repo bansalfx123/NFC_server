@@ -14,7 +14,7 @@
  * @see express.org
  * 
  * @author Robert Drummond
- * (C) 2013 Fatkahawai
+ * Copyright (c) 2013 Pink Pelican NZ Ltd <bob@pink-pelican.com>
  */
 
 var http      = require('http');

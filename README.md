@@ -20,3 +20,6 @@ this starts the http server using port 3000
 When a user now browses to http://<hostname>:3000, index.html will be loaded to the browser (served by the express webserver implemented in myapi.js) 
 
 the client-side code displays a list of NFC transactions, polling the server using AJAX requests for new transations. 
+
+
+Copyright (c) 2013 Pink Pelican NZ Ltd <bob@pink-pelican.com>
