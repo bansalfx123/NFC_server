@@ -39,10 +39,8 @@ var tcpPortNo  = 51717;      // tcp socket port number
 var httpPortNo = 3000;       // http port number
 
 // NFC transactions list
-//
-var txList     = [ { ID: '01', tag: 'Tom Bosley'},
-                   { ID: '02', tag: 'James Kirk'}
-                 ];
+// { ID: '00', tag: 'empty'}
+var txList     = [ ];
 
 // ------------------------------------------------------------------------
 // configure Express to serve index.html and any other static pages stored 
@@ -59,16 +57,23 @@ var txList     = [ { ID: '01', tag: 'Tom Bosley'},
 
 // Express route for incoming requests for a customer name
 app.get('/tx/:id', function(req, res){
+ var id = req.params.id;
   // send an object as a JSON string
- console.log('API request for transaction id = '+req.params.id);
- res.send(txList[req.params.id]);
+ console.log('API request for transaction id = '+id);
+ if( (id <0) || (id > txList.length) )
+    res.send([{ error: 'No transactions found'}]);
+ else
+    res.send(txList[req.params.id]);
 }); // apt.get()
 
 // Express route for incoming requests for a list of all customers
 app.get('/tx', function(req, res){
   // send an object as a JSON string
   console.log('API request for all transactions');
-  res.send(txList);
+  if( txList.length <= 0 )
+    res.send([{ error: 'No transactions found'}]);
+  else
+    res.send(txList);
 }); // apt.get()
 
 // Express route for any other unrecognised incoming requests
@@ -110,9 +115,13 @@ tcpServer = net.createServer(function(socket) {
 
     // process JSON data here
     var tx = JSON.parse(data);
-    console.log('parsed JSON result: data.ID= '+tx.ID+' data.tag= '+tx.tag);
+    console.log('parsed JSON result stringified: '+JSON.stringify(tx));
+    
+    tx.date = new Date();
+    console.log('added Timestamp: '+JSON.stringify(tx));
 
     txList.push(tx);
+    console.log('saved transaction to transactions list');
     //console.log('full txList: '+JSON.stringify(txList));
 
     socket.sendMessage('ACK'); 
