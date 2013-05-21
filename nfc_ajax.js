@@ -33,15 +33,21 @@ window.onload = function() {
         
         $('#transaction').html('<p>Timestamp : NFC Modulation Type : Baudrate : ATQA : UID </p>');
         console.log('API response. '+data.length+' transactions received: '+JSON.stringify(data) );    
-        for( var i=(data.length-1) ; i >= 0; i-- ) {
-          $('#transaction').append(
-            '<p>'
-            +data[i].date+' : '
-            +data[i].nfcModulationType+' : '
-            +data[i].baudRate
-            +data[i].ATQA+' : '
-            +data[i].UID+' : '
-            +'</p>');
+
+        if (typeof data[0].error != 'undefined') {
+          if ( data[0].error.length > 0 )
+            $('#transaction').append('<p>'+data[0].error+'</p>');
+        }
+        else
+          for( var i=0 ; i<data.length ; i++ ) {
+            $('#transaction').prepend(
+                '<p>'
+                +data[i].date+' : '
+                +data[i].nfcModulationType+' : '
+                +data[i].baudRate
+                +data[i].ATQA+' : '
+                +data[i].UID+' : '
+                +'</p>');
         }
       } 
     ); 
