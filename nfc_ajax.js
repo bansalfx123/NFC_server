@@ -14,7 +14,7 @@
  * Copyright (c) 2013 Pink Pelican NZ Ltd <bob@pink-pelican.com>
  */
 
-var POLL_PERIOD = 3000; // poll the server every 1 sec
+var POLL_PERIOD = 1000; // poll the server every 1 sec
 
 var timerID;     // global timer ID so we can clear it
 var cursor = -1;  // saves index of most recent transation displayed
@@ -46,7 +46,7 @@ function pollServer(){
     var url = homeURL+'tx/'; 
     // var url += txId;  // to select just one entry in txList table
 
-    console.log('sending Ajax query to '+url);    
+    // console.log('sending Ajax query to '+url);    
 
     // send API request to server URL as HTTP GET
     jqxhr = $.getJSON( url, function(data) {
@@ -74,13 +74,13 @@ function pollServer(){
                 +'<td>'+data[i].UID+'</td>'
                 +'</tr>');
             }
-            else
-                console.log('already displayed tx '+ index +' with UID '+data[i].UID);
+            // else
+            //    console.log('already displayed tx '+ index +' with UID '+data[i].UID);
 
           }; // for
           if (cursor != index ) {
             cursor = index;
-            console.log('set cursor to new position '+cursor);
+            // console.log('set cursor to new position '+cursor);
           }
         } // else
     }); //getJSON
