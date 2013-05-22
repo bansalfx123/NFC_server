@@ -39,7 +39,7 @@ var tcpPortNo  = 51717;      // tcp socket port number
 var httpPortNo = 3000;       // http port number
 
 // NFC transactions list
-// { ID: '00', tag: 'empty'}
+// { id: 0, date: 'xxx', nfcModulationType: 'ISO/IEC 14443', baudRate: '100', ATQA: 'FF FF', UID: 'FF FF FF FF'}
 var txList     = [ ];
 
 // ------------------------------------------------------------------------
@@ -55,7 +55,8 @@ var txList     = [ ];
 // set up Express routes - middleware to handle incoming requests
 //
 
-// Express route for incoming requests for a customer name
+// Express route for incoming requests for a single transaction
+//
 app.get('/tx/:id', function(req, res){
  var id = req.params.id;
   // send an object as a JSON string
@@ -66,7 +67,8 @@ app.get('/tx/:id', function(req, res){
     res.send(txList[req.params.id]);
 }); // apt.get()
 
-// Express route for incoming requests for a list of all customers
+// Express route for incoming requests for a list of all transactions
+//
 app.get('/tx', function(req, res){
   // send an object as a JSON string
   console.log('API request for all transactions');
@@ -77,11 +79,13 @@ app.get('/tx', function(req, res){
 }); // apt.get()
 
 // Express route for any other unrecognised incoming requests
+//
 app.get('*', function(req, res){
   res.send('Unrecognised API call', 404);
 });
 
 // Express route to handle errors
+//
 app.use(function(err, req, res, next){
   if (req.xhr) {
     res.send(500, 'Oops, Something went wrong with our API!');
