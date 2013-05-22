@@ -101,7 +101,7 @@ console.log('HTTP App Server is listening on port '+httpPortNo);
 // Open Socket and listen on port 51717
 //
 tcpServer = net.createServer(function(socket) { 
-  console.log('TCP server connected on ' + socket.remoteAddress +':'+ socket.remotePort);
+  console.log('TCP client connected on ' + socket.remoteAddress +':'+ socket.remotePort);
 
   socket = new JsonSocket(socket); //Now we've decorated the net.Socket to be a JsonSocket
 
@@ -118,13 +118,14 @@ tcpServer = net.createServer(function(socket) {
     console.log('parsed JSON result stringified: '+JSON.stringify(tx));
     
     tx.date = new Date();
-    console.log('added Timestamp: '+JSON.stringify(tx));
+    tx.id = txList.length;
+    console.log('added id '+tx.id+' and Timestamp: '+JSON.stringify(tx));
 
     txList.push(tx);
     console.log('saved transaction to transactions list');
     //console.log('full txList: '+JSON.stringify(txList));
 
-    socket.sendMessage('ACK'); 
+    socket.sendMessage({msg:'ACK'}); 
     console.log('TCP send: sent ACK to client');
   });
 
