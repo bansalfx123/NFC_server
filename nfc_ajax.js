@@ -14,7 +14,7 @@
  * Copyright (c) 2013 Pink Pelican NZ Ltd <bob@pink-pelican.com>
  */
 
-var POLL_PERIOD = 1000; // poll the server every 1 sec
+var POLL_PERIOD = 2000; // poll the server every 1 sec
 
 var timerID;     // global timer ID so we can clear it
 var cursor = -1;  // saves index of most recent transation displayed
@@ -52,7 +52,7 @@ function pollServer(){
     jqxhr = $.getJSON( url, function(data) {
         
         console.log('API response. '+data.length+' transactions received');
-        console.log(' '+JSON.stringify(data) );    
+        //console.log(' '+JSON.stringify(data) );    
         console.log('cursor is at id '+cursor);
 
         if (typeof data[0].error != 'undefined') {

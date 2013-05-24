@@ -71,7 +71,7 @@ app.get('/tx/:id', function(req, res){
 //
 app.get('/tx', function(req, res){
   // send an object as a JSON string
-  console.log('API request for all transactions');
+  // console.log('API request for all transactions');
   if( txList.length <= 0 )
     res.send([{ error: 'No transactions found'}]);
   else
@@ -129,8 +129,9 @@ tcpServer = net.createServer(function(socket) {
     console.log('saved transaction to transactions list');
     //console.log('full txList: '+JSON.stringify(txList));
 
-    socket.sendMessage({msg:'ACK'}); 
-    console.log('TCP send: sent ACK to client');
+    // the RPi sometimes didnt get an ACK so hung in read, so i disabled the sending an ACK
+    // socket.sendMessage({msg:'ACK'}); 
+    // console.log('TCP send: sent ACK to client');
   });
 
   socket.on('end', function() {
